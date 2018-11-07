@@ -1,0 +1,81 @@
+---
+"Test kv dictionary processor with defaults (ignore case false)":
+  - do:
+      ingest.put_pipeline:
+        id: "my_pipeline"
+        body:  
+          {
+            "description": "_description",
+            "processors": [
+              {
+                "kvdictionary" : {
+                  "field" : "input",
+                  "target_field" : "output",
+                  "dictionary_json" : {
+                    "Input1": "Value1",
+                    "Input2": "Value2",
+                    "Input3": "Value3"
+                  }
+                }
+              }
+            ]
+          }
+  - match: { acknowledged: true }
+
+  - do:
+      index:
+        index: test
+        type: test
+        id: 1
+        pipeline: "my_pipeline"
+        body: {"input": "Input1"}
+
+  - do:
+      get:
+        index: test
+        type: test
+        id: 1
+  - match: { _source.input: "Input1" }
+  - match: { _source.output: "Value1" }
+
+---
+"Test kv dictionary processor - ignore case":
+  - do:
+      ingest.put_pipeline:
+        id: "my_pipeline"
+        body:  
+          {
+            "description": "_description",
+            "processors": [
+              {
+                "kvdictionary" : {
+                  "field" : "input",
+                  "target_field" : "output",
+                  "dictionary_json" : {
+                    "Input1": "Value1",
+                    "Input2": "Value2",
+                    "Input3": "Value3"
+                  },
+                  "ignore_case": true
+                }
+              }
+            ]
+          }
+  - match: { acknowledged: true }
+
+  - do:
+      index:
+        index: test
+        type: test
+        id: 1
+        pipeline: "my_pipeline"
+        body: {"input": "input1"}
+
+  - do:
+      get:
+        index: test
+        type: test
+        id: 1
+  - match: { _source.input: "input1" }
+  - match: { _source.output: "Value1" }
+
