@@ -72,7 +72,7 @@ After building the zip file, you can install it like this
 bin/elasticsearch-plugin install file:///path/to/ingest-kvdictionary/build/distribution/ingest-kvdictionary-0.0.1-SNAPSHOT.zip
 ```
 
-Dictionaries are expected in the folder `config/kv_dictionary_plugin`. If you want to use a dictionary called `dict1.txt` in that dictionary, you need to configure the parameter `dictionary_file` to `dict1.txt`
+Dictionaries are expected in the folder `config/kv_dictionary_plugin`. If you want to use a dictionary called `dict1.txt` in that folder, you need to configure the parameter `dictionary_file` to `dict1.txt`
 
 ## Resiliency
 The dictionary is intended to work regardless of most errors, and warn about them. Some examples:
@@ -85,6 +85,7 @@ The dictionary is intended to work regardless of most errors, and warn about the
 
 ## Bugs & TODO
 
-* There are always bugs
-* and todos...
+- Implement `charset` compatibility for different encodings
+- Improve tests - currently, tests do not read from dictionary files, only from the processor config
+- Run performance tests for various dictionary sizes
 
