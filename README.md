@@ -75,7 +75,7 @@ bin/elasticsearch-plugin install file:///path/to/ingest-kvdictionary/build/distr
 Dictionaries are expected in the folder `config/kv_dictionary_plugin`. If you want to use a dictionary called `dict1.txt` in that folder, you need to configure the parameter `dictionary_file` to `dict1.txt`
 
 ## Resiliency
-The dictionary is intended to work regardless of most errors, and warn about them. Some examples:
+The dictionary is intended to work regardless of most errors, and warn about them. Some examples of both cases in which execution continues and it which it is halted follow:
 - If no dictionary is defined, the processor will warn in the logs about doing nothing, but it will not fail when added to a pipeline, and documents going through the pipeline will be normally ingested
 - If a `charset` (not implemented) is defined, it will set the default charset and warn in the logs
 - If there is an io error reading the dictionary, it will fail and log the error. 
