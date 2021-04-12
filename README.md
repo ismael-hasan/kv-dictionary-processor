@@ -1,6 +1,6 @@
 # Elasticsearch kvdictionary Ingest Processor
 
-It reads a key-value dictionary from the processor configuration and/or a file in `config/kv_dictionary_plugin` and it applies that key-value translation to a field
+This processor reads a key-value dictionary from the processor configuration and/or a file in `config/kv_dictionary_plugin` and it applies that key-value translation to a field
 
 ## Usage
 
